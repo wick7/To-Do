@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h1>New Task Page</h1>
+        <h1>Create New Task</h1>
         <a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>See
             Listing</a>
     </div>
@@ -8,7 +8,7 @@
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s6">
-                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <input placeholder="Task Name" id="first_name" type="text" class="validate">
                     <label for="task_name">Task Name</label>
                 </div>
                 <div class="input-field col s12">
@@ -35,7 +35,7 @@ $(document).on('submit',function(){
         name: taskN,
         desc: descript
     }
-    
+
 
     $.ajax({
 			type: "POST",
