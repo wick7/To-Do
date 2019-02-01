@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <h1>New Task Page</h1>
+        <a href="/" class="waves-effect waves-light btn"><i class="material-icons left">arrow_back</i>See
+            Listing</a>
+    </div>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+                    <label for="task_name">Task Name</label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Task Description</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+</div>
+
+<script>
+
+$(document).on('submit',function(){
+
+    var taskN = $("#first_name").val();
+    var descript = $("#textarea1").val();
+
+    var newTask = {
+        name: taskN,
+        desc: descript
+    }
+
+    $.ajax({
+			type: "POST",
+			url: "/submit",
+			data: newTask
+		}).then(function (data) {
+	});
+
+});
+
+</script>

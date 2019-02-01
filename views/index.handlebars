@@ -1,0 +1,94 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h1>To-Do</h1>
+            <a href="/new-task" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Add New Task</a>
+            <table class="highlight">
+        <thead>
+          <tr>
+              <th>Task</th>
+              <th>Description</th>
+              <th>Completed</th>
+              <th>Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            {{#each toDos}}
+            <tr class="taskUpdate">
+                <form  action="#">
+                <td>{{task}}</td>
+                <td>{{description}}</td>
+                <td>
+                    
+                        <p>
+                        <label>
+                            <input class="item" data-name={{id}} data-status={{completed}} type="checkbox" {{completed}}/>
+                            <span></span>
+                        </label>
+                        </p>
+                    
+                </td>
+                <td>
+                    <div class="deleted btn-floating btn-small waves-effect waves-light red" ><i class=" material-icons" data-curid={{id}}>close</i></div>
+                </td>
+                </form>
+            </tr>
+            {{/each}}
+        </tbody>
+      </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function updateStatus() {
+    var del = $(this).parent().data('curId');
+   console.log(del)
+}
+    
+$(".item").on('click', function() {
+
+   var name = $(this).data('name');
+   var complete = $(this).data('status');
+
+
+    if(complete == 'unchecked') {
+        complete = 'checked'
+        $(this).data('status', 'checked')
+    }else if (complete == 'checked') {
+        complete = 'unchecked'
+        $(this).data('status', 'unchecked')
+    }
+   
+    var newData = {
+        curName: name,
+        state: complete
+    }
+    
+   $.ajax({
+			type: "PUT",
+			url: "/update",
+			data: newData
+		}).then(function (data) {
+		});
+});
+
+$(".deleted > i").on('click', function(event) {
+
+   var del = $(this).data('curid');
+
+    $.ajax("/deleted/" + del, {
+            type: "DELETE"
+        }).then(function () {
+    });
+
+$(this).parent().parent().hide('slow', function(){ $(this).parent().remove(); });
+ 
+});
+
+
+</script>
